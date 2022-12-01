@@ -20,7 +20,7 @@ from timeit import default_timer as timer
 PAJDHFCVRE = 0
 FAODSKLNVR = '' 
 
-class vagabond(): #the basic random walker
+class vagabot(): #the basic random walker
     def __init__(self, location, min_travel_dist):
         self.direction = arr([1,0])
         self.min_travel_dist = min_travel_dist
@@ -121,8 +121,8 @@ def rollout(): #autodownload procgen imgs
     runs = 1000  
     start  = timer()
     for i in range(runs):
-        mapper = vagabond(get_edge() , 35) # vagabond( arr([starting position]) ,  min_wander_distance_before_can_leave_box )
-        path_data = mapper.get_path_data(35) #get the paths taken by vagabond
+        mapper = vagabot(get_edge() , 35) # vagabot( arr([starting position]) ,  min_wander_distance_before_can_leave_box )
+        path_data = mapper.get_path_data(35) #get the paths taken by vagabot
         map_profile = map(path_data) #get text map 10 x 10
         map_profile.generate()
         graph = map_profile.console_map
@@ -149,8 +149,8 @@ def manual(event):
     filename = ''
     img = 0
     if event.key == "right":
-        mapper = vagabond(arr([9,0]) , 15) # vagabond( arr([starting position]) ,  min_wander_distance_before_can_leave_box )
-        path_data = mapper.get_path_data(99) #get the paths taken by vagabond
+        mapper = vagabot(arr([9,0]) , 15) # vagabot( arr([starting position]) ,  min_wander_distance_before_can_leave_box )
+        path_data = mapper.get_path_data(99) #get the paths taken by vagabot
         map_profile = map(path_data) #get text map 10 x 10
         map_profile.generate()
         filename =  str(binascii.b2a_hex(os.urandom(8)).decode('latin-1'))
