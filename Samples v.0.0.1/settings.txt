@@ -1,0 +1,8 @@
+rollout settings:
+
+10_000 runs
+35% tunnel vision
+40 minimum wander
+0.55 minimum density
+0.75 maximum density
+found 72 at : 63.0727169

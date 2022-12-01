@@ -116,13 +116,12 @@ def get_edge():
         ]
     )
 
-def rollout(): #autodownload procgen imgs
+def rollout(runs,tunnel_vision,min_wander, min_density,max_density): #autodownload procgen imgs
     sum = 0
-    runs = 1000  
     start  = timer()
     for i in range(runs):
-        mapper = vagabot(get_edge() , 35) # vagabot( arr([starting position]) ,  min_wander_distance_before_can_leave_box )
-        path_data = mapper.get_path_data(35) #get the paths taken by vagabot
+        mapper = vagabot(get_edge() , min_wander) # vagabot( arr([starting position]) ,  min_wander_distance_before_can_leave_box )
+        path_data = mapper.get_path_data(tunnel_vision) #get the paths taken by vagabot
         map_profile = map(path_data) #get text map 10 x 10
         map_profile.generate()
         graph = map_profile.console_map
@@ -131,7 +130,7 @@ def rollout(): #autodownload procgen imgs
         graph = graph.flatten()
         x_measure = np.count_nonzero(graph == 'x')
         density = x_measure/size 
-        if density >= 0.50 and density <= 0.70:
+        if density >= min_density and density <= max_density:
             image = im.fromarray(map_profile.graph)
             filename =  str(binascii.b2a_hex(os.urandom(8)).decode('latin-1'))
             fullpath = os.path.join("E:\RandomWalkPictures", filename + '.' + "png")
@@ -164,7 +163,7 @@ def manual(event):
 
     elif event.key == "down":
         print(type(PAJDHFCVRE))
-        fullpath = os.path.join("C:\\Users\\Cache\\Pictures\\RandomPic", FAODSKLNVR + '.' + "png")
+        fullpath = os.path.join("E:\RandomWalkPictures", FAODSKLNVR + '.' + "png")
         PAJDHFCVRE.save(fullpath)
         print("saved")
 
@@ -172,6 +171,7 @@ def manual(event):
 def main():
     fig,ax  = plt.subplots()
     cid = fig.canvas.mpl_connect('key_press_event',manual)
+    rollout(10000,35,40,0.55,0.75)
     #I'll figure this out later
     pass
    
