@@ -33,7 +33,7 @@ def progress_bar(progress, total,**running_sum ):
     bar = '▄' * int(percent) + '-' * (100-int(percent))
     print(f"\r {running_sum['running_sum']} |{bar} | {percent:.2f}%", end="\r")
 
-def rollout(runs, tunnel_vision, min_wander, min_density,max_density, folder): #autodownload procgen imgs
+def autobot(runs, tunnel_vision, min_wander, min_density,max_density, folder): #autodownload procgen imgs
     sum = 0
     start  = timer()
     dirpath = str(binascii.b2a_hex(os.urandom(8)).decode('latin-1'))
@@ -62,40 +62,17 @@ def rollout(runs, tunnel_vision, min_wander, min_density,max_density, folder): #
 
     print("largest w_measure: " + str(largest) + " found: "+str(sum) + " at: "+ str(timer()- start) + "    ")
 
-def manual(event):
-    global PAJDHFCVRE  #picture
-    global FAODSKLNVR  #filename
-    print('press', event.key)
-    sys.stdout.flush()
-    filename = ''
-    img = 0
-    if event.key == "right":
-        mapper = wand(arr([9,0]) , 15) # wanderer( arr([starting position]) ,  min_wander_distance_before_can_leave_box )
-        path_data = mapper.get_path_data(99) #get the paths taken by wanderer
-        map_profile = map(path_data) #get text map 10 x 10
-        map_profile.generate()
-        print(PAJDHFCVRE)
-        plt.imshow(map_profile.graph)
-        plt.show()
-        print(map_profile.console_map) # print to console
-
-    elif event.key == "down":
-        print(type(PAJDHFCVRE))
-        fullpath = os.path.join("E:\RandomWalkPictures", FAODSKLNVR + '.' + "png")
-        PAJDHFCVRE.save(fullpath)
-        print("saved")
-
 
 def main():
     fig,ax  = plt.subplots()
     cid = fig.canvas.mpl_connect('key_press_event',manual)
     folder = "E:\RandomWalkPictures"
-    rollout(10_000,50,25,0.40,0.55,folder)
+    autobot(10_000,50,25,0.40,0.55,folder)
     #I'll figure this out later
     pass
    
 if __name__=="__main__":
-    main() # does nothing atm 
+    main()
 
 
 
